@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "transportmd"
+version = "0.1.0"
+description = "Transport property calculation using molecular dynamics and machine learning."
+authors = ["Gabriel Braun <braun.pineschi@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+rich = "^13.9.2"
+numpy = "^1.26.4"
+scipy = "^1.14.1"
+matplotlib = "^3.9.2"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.10.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
