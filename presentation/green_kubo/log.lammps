@@ -1,0 +1,37 @@
+LAMMPS (29 Aug 2024)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (src/comm.cpp:98)
+  using 1 OpenMP thread(s) per MPI task
+units real
+dimension 3
+atom_style atomic
+pair_style lj/cut 1.2e-09
+pair_modify mix arithmetic tail yes
+boundary p p p
+region simulation_box block 0 2e-08 0 2e-08 0 2e-08
+create_box 1 simulation_box
+Created orthogonal box = (0 0 0) to (2e-08 2e-08 2e-08)
+  1 by 1 by 1 MPI processor grid
+labelmap atom 1 O2
+create_atoms 1 random 400 188589 simulation_box
+Created 400 atoms
+  using lattice units in orthogonal box = (0 0 0) to (2e-08 2e-08 2e-08)
+  create_atoms CPU = 0.000 seconds
+mass O2 2.6566962e-26
+pair_coeff O2 O2 1.4731524830000001e-21 3.467e-10
+variable step equal step
+variable V equal vol
+variable P equal press
+variable D equal density
+variable Pxy equal pxy
+variable Pxz equal pxz
+variable Pyz equal pyz
+compute myKE all ke/atom
+compute myPE all pe/atom
+compute myStress all stress/atom NULL virial
+compute flux all heat/flux myKE myPE myStress
+variable Jx equal c_flux[1]/vol
+variable Jy equal c_flux[2]/vol
+variable Jz equal c_flux[3]/vol
+timestep 1e-15
+thermo 5
+thermo_style custom step time temp press v_Pxy v_Pxz v_Pyz v_Jx v_Jy v_Jz
